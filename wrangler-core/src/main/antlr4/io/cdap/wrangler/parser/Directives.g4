@@ -114,6 +114,13 @@ codeblock
 identifier
  : Identifier
  ;
+BYTE_SIZE: [0-9]+(KB|MB|GB|TB|B);  // e.g., 10KB, 500MB
+TIME_DURATION: [0-9]+(ms|s|m|h);  // e.g., 150ms, 2s, 3m
+fragment BYTE_UNIT: KB | MB | GB | TB | B;
+fragment TIME_UNIT: ms | s | m | h;
+byteSizeArg: BYTE_SIZE;
+timeDurationArg: TIME_DURATION;
+
 
 properties
  : 'prop' ':' OBrace (propertyList)+  CBrace
@@ -140,7 +147,8 @@ numberRange
  ;
 
 value
- : String | Number | Column | Bool
+ : value: NUMBER | BYTE_SIZE | TIME_DURATION | STRING | BOOLEAN;
+
  ;
 
 ecommand
